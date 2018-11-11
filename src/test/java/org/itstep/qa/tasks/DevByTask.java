@@ -84,8 +84,21 @@ public class DevByTask {
     public void errorsAreDisplaing(){
         WebElement commit = driver.findElement(By.name("commit"));
         Assert.assertTrue(commit.isDisplayed(), "Кнопка подтверждения не отображается");
-
+        commit.click();
+        WebElement formErrorOne = driver.findElement(By.xpath("//*[@id=\"new_user\"]/div[3]/div/div/div/div[1]"));
+        Assert.assertTrue(formErrorOne.isDisplayed(), "Ошибка юзернейма не отображается");
+        Assert.assertEquals("* Необходимо заполнить\n* Минимум 2 символа(ов)\n* Запрещены специальные символы", formErrorOne.getText());
+        WebElement formErrorTwo = driver.findElement(By.xpath("//*[@id=\"new_user\"]/div[4]/div/div/div/div[1]"));
+        Assert.assertTrue(formErrorTwo.isDisplayed(), "Ошибка емейла не отображается");
+        Assert.assertEquals("* Необходимо заполнить\n* Неверный формат email", formErrorTwo.getText());
+        WebElement formErrorThree = driver.findElement(By.xpath("//*[@id=\"new_user\"]/div[5]/div/div/div[1]/div[1]"));
+        Assert.assertTrue(formErrorThree.isDisplayed(), "Ошибка пароля не отображается");
+        Assert.assertEquals("* Необходимо заполнить\n* Минимум 6 символа(ов)", formErrorThree.getText());
+        WebElement formErrorFour = driver.findElement(By.xpath("//*[@id=\"new_user\"]/div[5]/div/div/div[2]/div[1]"));
+        Assert.assertTrue(formErrorFour.isDisplayed(), "Ошибка подтверждения пароля не отображается");
+        Assert.assertEquals("* Необходимо заполнить", formErrorFour.getText());
+        WebElement formErrorFive = driver.findElement(By.xpath("//*[@id=\"new_user\"]/div[9]/div/div/span/div/div[1]"));
+        Assert.assertTrue(formErrorFive.isDisplayed(), "Ошибка чекбокса не отображается");
+        Assert.assertEquals("* Необходимо отметить", formErrorFive.getText());
     }
-
-
 }
